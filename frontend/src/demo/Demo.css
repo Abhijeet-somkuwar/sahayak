@@ -1,0 +1,219 @@
+/* Demo helper (development only): the floating button, its panel, the guide page and the sign-in shortcuts. */
+
+.demo-fab {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--stamp);
+  color: #fff;
+  font: 500 var(--t-sm) / 1 var(--font-text);
+  box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.4);
+  cursor: pointer;
+}
+.demo-fab:hover,
+.demo-fab:focus-visible {
+  background: #47307f;
+}
+/* on the waiting-hall TV: a quiet outline in the board's colours (still meets contrast on the dark board) */
+.demo-fab--board {
+  border: 1px solid currentColor;
+  background: transparent;
+  color: var(--board-muted);
+  box-shadow: none;
+}
+.demo-fab--board:hover,
+.demo-fab--board:focus-visible {
+  background: var(--stamp);
+  color: #fff;
+}
+@media print {
+  .demo-fab {
+    display: none;
+  }
+}
+
+.demo-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.demo-panel h3 {
+  margin: 0 0 2px;
+  color: var(--ward);
+  font: 600 var(--t-md) / 1.3 var(--font-display);
+}
+.demo-panel__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.demo-panel__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.demo-panel__phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.demo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border: var(--rule-width) solid var(--rule);
+  border-radius: var(--r-control);
+  background: var(--sheet);
+}
+.demo-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.demo-card .demo-panel__row {
+  margin-top: 6px;
+}
+
+/* sign-in page shortcuts */
+.login__demo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px dashed var(--stamp);
+  border-radius: var(--r-control);
+}
+
+/* ---- the guide page (/demo) ---- */
+.demo-guide {
+  min-height: 100dvh;
+  padding: 24px 16px 96px;
+  background: var(--paper);
+  color: var(--ink);
+}
+.demo-guide__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.demo-guide__kicker {
+  color: var(--stamp);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.demo-guide h1 {
+  margin: 4px 0 8px;
+  color: var(--ward);
+  font: 600 var(--t-xl) / 1.2 var(--font-display);
+}
+.demo-guide h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  color: var(--ward-deep);
+  font: 600 var(--t-lg) / 1.3 var(--font-display);
+}
+.demo-guide__part {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: var(--r-paper);
+  background: var(--sheet);
+  box-shadow: var(--shadow-slip);
+}
+.demo-guide__story {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.demo-guide ol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding-left: 22px;
+}
+.demo-guide li::marker {
+  color: var(--ward);
+  font-weight: 600;
+}
+.demo-guide__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.demo-guide__why {
+  padding: 10px 12px;
+  border-left: 3px solid var(--marigold);
+  border-radius: 0 var(--r-control) var(--r-control) 0;
+  background: #fffaeb;
+}
+.demo-guide__why p + p,
+.demo-guide__why ul {
+  margin-top: 4px;
+}
+.demo-guide__why ul {
+  padding-left: 18px;
+}
+.demo-guide__staff {
+  padding: 10px 12px;
+  border-left: 3px solid var(--ward);
+  border-radius: 0 var(--r-control) var(--r-control) 0;
+  background: var(--triage-routine-tint);
+}
+.demo-guide table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-sm);
+}
+.demo-guide th,
+.demo-guide td {
+  padding: 8px;
+  border-bottom: var(--rule-width) solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.demo-guide__table {
+  overflow-x: auto;
+}
+
+.who {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+  font: 500 var(--t-xs) / 1.6 var(--font-text);
+  white-space: nowrap;
+}
+.who--patient {
+  background: var(--triage-self-care-tint);
+  color: var(--triage-self-care);
+}
+.who--screen {
+  background: #efeafa;
+  color: var(--stamp);
+}
+.who--staff {
+  background: var(--triage-routine-tint);
+  color: var(--triage-routine);
+}
+.who--emergency {
+  background: var(--triage-emergency-tint);
+  color: var(--triage-emergency);
+}

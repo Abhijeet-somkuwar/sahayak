@@ -1,0 +1,67 @@
+/*
+ * Sahayak design tokens — "the Parchi" (FRONTEND_DESIGN.md §3).
+ * Every colour, font, size and motion value lives here; components use var(--...) and never raw hex.
+ */
+:root {
+  /* Colour */
+  --ward: #0f5b4e;
+  --ward-deep: #0a3f36;
+  --paper: #f4f7f6;
+  --sheet: #ffffff;
+  --ink: #1b2523;
+  --ink-soft: #4e5d5a;
+  --rule: #d5dedb;
+  --stamp: #5a3e9e;
+  --marigold: #f2a900;
+  --board-muted: #9fb8b1;
+
+  --triage-emergency: #b42318;
+  --triage-emergency-tint: #fdecea;
+  --triage-priority: #a15c00;
+  --triage-priority-tint: #fff4e0;
+  --triage-routine: #23704a;
+  --triage-routine-tint: #e7f4ec;
+  --triage-self-care: #1f5fa8;
+  --triage-self-care-tint: #e8f0fb;
+
+  /* Typography (families swap per language in base.css) */
+  --font-text: 'Hind', system-ui, sans-serif;
+  --font-display: 'Anek Latin', 'Hind', sans-serif;
+  --lh-body: 1.55;
+
+  --t-xs: 0.8125rem;
+  --t-sm: 0.875rem;
+  --t-md: 1rem;
+  --t-lg: 1.25rem;
+  --t-xl: 1.5625rem;
+  --t-2xl: 1.9375rem;
+  --t-3xl: 2.4375rem;
+  --t-token: clamp(5rem, 26vw, 8.5rem);
+  --t-board-token: 18vh;
+
+  /* Space (4px base) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-12: 48px;
+  --s-16: 64px;
+
+  /* Shape and depth */
+  --r-paper: 6px;
+  --r-control: 10px;
+  --r-pill: 999px;
+  --rule-width: 1px;
+  --shadow-slip: 0 1px 0 var(--rule), 0 14px 28px -16px rgb(15 91 78 / 0.35);
+
+  /* Motion */
+  --ease-stamp: cubic-bezier(0.2, 1.4, 0.4, 1);
+  --d-stamp: 280ms;
+  --d-panel: 120ms;
+  --d-crossfade: 150ms;
+  --d-takeover: 200ms;
+
+  --text-scale: 1;
+}

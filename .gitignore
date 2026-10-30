@@ -1,0 +1,16 @@
+node_modules
+dist
+.dist
+.env
+.env.local
+playwright-report
+test-results
+_archive_typescript/**/node_modules
+.DS_Store
+__MACOSX
+.demo-device-keys.json
+e2e/.mfa-secrets.json
+
+# Not published: the old TypeScript originals and the large rendered videos
+_archive_typescript/
+docs/video/*.mp4

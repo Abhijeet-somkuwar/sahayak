@@ -1,0 +1,144 @@
+/* Base styles: fonts per language, focus, contrast mode, the slip, the stamp, utilities, print. */
+
+:lang(hi) {
+  --font-text: 'Hind', system-ui, sans-serif;
+  --font-display: 'Anek Devanagari', 'Hind', sans-serif;
+  --lh-body: 1.65;
+}
+:lang(gu) {
+  --font-text: 'Hind Vadodara', system-ui, sans-serif;
+  --font-display: 'Anek Gujarati', 'Hind Vadodara', sans-serif;
+  --lh-body: 1.65;
+}
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: calc(16px * var(--text-scale));
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100dvh;
+  line-height: var(--lh-body);
+  font-family: var(--font-text);
+}
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 500;
+}
+p {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Visible focus everywhere: 3px stamp outline, 2px offset */
+:focus-visible,
+.ant-btn:focus-visible,
+.ant-input:focus-visible,
+.ant-select-focused .ant-select-selector {
+  outline: 3px solid var(--stamp) !important;
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High-contrast mode */
+:root[data-contrast='high'] {
+  --ink-soft: var(--ink);
+  --rule: var(--ink);
+  --rule-width: 2px;
+  --triage-emergency-tint: var(--sheet);
+  --triage-priority-tint: var(--sheet);
+  --triage-routine-tint: var(--sheet);
+  --triage-self-care-tint: var(--sheet);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- utilities ---------- */
+.text-soft { color: var(--ink-soft); }
+.text-sm { font-size: var(--t-sm); }
+.text-md { font-size: var(--t-md); }
+.text-lg { font-size: var(--t-lg); }
+.text-xl { font-size: var(--t-xl); line-height: 1.3; }
+.text-2xl { font-size: var(--t-2xl); line-height: 1.2; }
+.text-3xl { font-size: var(--t-3xl); line-height: 1.1; }
+.font-display { font-family: var(--font-display); }
+.tnum { font-variant-numeric: tabular-nums; }
+.prose-narrow { max-width: 68ch; }
+.rule-b { border-bottom: var(--rule-width) solid var(--rule); }
+.rule-t { border-top: var(--rule-width) solid var(--rule); }
+.rule-r { border-right: var(--rule-width) solid var(--rule); }
+.rule-l { border-left: var(--rule-width) solid var(--rule); }
+.rule-all { border: var(--rule-width) solid var(--rule); }
+.stack { display: flex; flex-direction: column; gap: var(--s-4); }
+.row { display: flex; align-items: center; gap: var(--s-2); }
+.sheet { background: var(--sheet); border-radius: var(--r-paper); }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.skeleton {
+  background: color-mix(in srgb, var(--rule) 55%, var(--paper));
+  border-radius: var(--r-control);
+  color: transparent;
+  display: inline-block;
+}
+
+/* Patient-size controls: 56px targets, larger text */
+.patient .ant-btn-lg, .btn-patient.ant-btn { min-height: 56px; font-size: var(--t-lg); padding-inline: var(--s-6); }
+.patient .ant-input-lg, .patient .ant-input-affix-wrapper-lg { min-height: 56px; font-size: var(--t-lg); }
+.patient .ant-form-item-label > label { font-size: var(--t-md); font-weight: 500; }
+.patient .ant-form-item-explain-error { font-size: var(--t-sm); }
+
+/* Keyboard hint inside a button */
+.kbd {
+  margin-left: auto;
+  padding: 0 6px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: var(--t-xs);
+  opacity: 0.7;
+}
+.ant-btn .kbd { margin-left: 8px; }
+
+/* Numerals: Anek, weight 700, width axis per surface */
+.numeral {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: 'wdth' var(--numeral-width, 75);
+  font-stretch: var(--numeral-stretch, 75%);
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.01em;
+}
+.numeral--board { --numeral-width: 100; --numeral-stretch: 100%; }
+
+/* ---------- motion ---------- */
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes takeover-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.fade-in { animation: fade var(--d-panel) ease-out both; }
+.crossfade { animation: fade var(--d-crossfade) ease-out both; }
+.takeover { animation: takeover-up var(--d-takeover) ease-out both; }
+
+/* Display board */
+.board { cursor: none; user-select: none; }
+
+/* ---------- print: 80mm thermal slip ---------- */
+@media print {
+  @page { size: 80mm auto; margin: 4mm; }
+  body * { visibility: hidden; }
+  .print-slip, .print-slip * { visibility: visible; }
+  .print-slip { position: absolute; inset: 0; width: 72mm; box-shadow: none !important; mask: none !important; -webkit-mask: none !important; }
+  .stamp { mix-blend-mode: normal; animation: none; }
+}

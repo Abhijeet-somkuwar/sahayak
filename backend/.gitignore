@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+db/schema.sql
+/tmp/
+.smoke-totp.json
+
+.demo-device-keys.json

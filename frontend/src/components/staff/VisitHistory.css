@@ -1,0 +1,35 @@
+.visit-history {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 16px 16px;
+  padding-top: 12px;
+  border-top: var(--rule-width) solid var(--rule);
+}
+.visit-history__label {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.visit-history__dx {
+  font-weight: 500;
+}
+.visit-history__facts {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+}
+.visit-history__facts > div {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  column-gap: 12px;
+}
+.visit-history__facts dt {
+  color: var(--ink-soft);
+}
+.visit-history__facts dd {
+  margin: 0;
+}
+.visit-history__ai {
+  font-style: italic;
+}

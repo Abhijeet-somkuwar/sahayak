@@ -1,0 +1,142 @@
+# Local development / assignment demo: the whole state cell on one machine (§4.1, §19).
+name: sahayak
+
+x-app-env: &app-env
+  NODE_ENV: development
+  APP_TIMEZONE: Asia/Kolkata
+  DATABASE_URL: postgres://sahayak_api:dev@pgbouncer:5432/sahayak
+  DATABASE_URL_MAINT: postgres://sahayak_maint:dev@postgres:5432/sahayak
+  DATABASE_REPLICA_URL: postgres://sahayak_analytics:dev@postgres:5432/sahayak
+  REDIS_CORE_URL: redis://redis-core:6379
+  REDIS_CACHE_URL: redis://redis-cache:6379
+  S3_ENDPOINT: http://objectstore:9000
+  S3_BUCKET: sahayak
+  S3_ACCESS_KEY: minioadmin
+  S3_SECRET_KEY: minioadmin
+  DEV_MASTER_KEY: ${DEV_MASTER_KEY:-c2FoYXlhay1kZXYtbWFzdGVyLWtleS0zMi1ieXRlcyE=}
+  BLIND_INDEX_KEY: ${BLIND_INDEX_KEY:-c2FoYXlhay1kZXYtYmxpbmQtaW5kZXgtMzJieXRlcyE=}
+  JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY:?run `npm run keys:gen` and put the keys in .env}
+  JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY:?run `npm run keys:gen` and put the keys in .env}
+  WA_APP_SECRET: ${WA_APP_SECRET:-dev-wa-app-secret}
+  WA_VERIFY_TOKEN: ${WA_VERIFY_TOKEN:-dev-verify-token}
+  WA_ACCESS_TOKEN: ${WA_ACCESS_TOKEN:-}
+  WA_PHONE_NUMBER_ID: ${WA_PHONE_NUMBER_ID:-}
+  ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+  LLM_MODEL_FAST: ${LLM_MODEL_FAST:-claude-haiku-4-5-20251001}
+  LLM_MODEL_SMART: ${LLM_MODEL_SMART:-claude-sonnet-5-5}
+  EMBEDDINGS_PROVIDER: ${EMBEDDINGS_PROVIDER:-mock}
+  EMBEDDINGS_API_KEY: ${EMBEDDINGS_API_KEY:-}
+  EMBEDDINGS_MODEL: ${EMBEDDINGS_MODEL:-mock-1024}
+  EMBEDDINGS_DIM: "1024"
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg18
+    environment:
+      POSTGRES_DB: sahayak
+      POSTGRES_USER: sahayak_maint
+      POSTGRES_PASSWORD: dev
+    ports: ["${POSTGRES_HOST_PORT:-5434}:5432"]   # 5434 on the host: a local Postgres often already owns 5432
+    command: ["postgres", "-c", "shared_preload_libraries=pg_stat_statements", "-c", "log_min_duration_statement=200",
+              "-c", "log_parameter_max_length=0", "-c", "idle_in_transaction_session_timeout=10s"]
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sahayak_maint -d sahayak"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  pgbouncer:
+    image: edoburu/pgbouncer
+    environment:
+      DATABASE_URL: postgres://sahayak_api:dev@postgres:5432/sahayak
+      POOL_MODE: transaction
+      MAX_PREPARED_STATEMENTS: "200"
+      AUTH_TYPE: scram-sha-256
+      MAX_CLIENT_CONN: "1000"
+      DEFAULT_POOL_SIZE: "40"
+    ports: ["6432:5432"]
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  redis-core:
+    image: redis:8
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec", "--maxmemory-policy", "noeviction"]
+    ports: ["6379:6379"]
+    volumes: [rediscore:/data]
+    healthcheck: { test: ["CMD", "redis-cli", "ping"], interval: 5s, timeout: 3s, retries: 10 }
+
+  redis-cache:
+    image: redis:8
+    command: ["redis-server", "--save", "", "--maxmemory", "512mb", "--maxmemory-policy", "allkeys-lru"]
+    ports: ["6380:6379"]
+    healthcheck: { test: ["CMD", "redis-cli", "ping"], interval: 5s, timeout: 3s, retries: 10 }
+
+  objectstore:
+    # S3-compatible store. MinIO's public images are no longer pullable anonymously, so RustFS (MinIO-compatible API)
+    # is used for local development; any S3-compatible service works in production (§5.1).
+    image: rustfs/rustfs:latest
+    environment: { RUSTFS_ACCESS_KEY: minioadmin, RUSTFS_SECRET_KEY: minioadmin, RUSTFS_VOLUMES: /data, RUSTFS_CONSOLE_ENABLE: "true" }
+    ports: ["9000:9000", "9001:9001"]
+    volumes: [minio:/data]
+
+  migrate:
+    build: .
+    command: ["node", "src/apps/migrate.js"]
+    environment: *app-env
+    depends_on:
+      postgres: { condition: service_healthy }
+    restart: "no"
+
+  api:
+    build: .
+    command: ["node", "src/apps/api.js"]
+    environment: { <<: *app-env, PORT: "3000" }
+    ports: ["3000:3000"]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      pgbouncer: { condition: service_started }
+      redis-core: { condition: service_healthy }
+      redis-cache: { condition: service_healthy }
+    healthcheck: { test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/v1/healthz"], interval: 10s, timeout: 3s, retries: 10 }
+
+  realtime:
+    build: .
+    command: ["node", "src/apps/realtime.js"]
+    environment: { <<: *app-env, PORT: "3001" }
+    ports: ["3001:3001"]
+    depends_on:
+      redis-core: { condition: service_healthy }
+
+  webhook:
+    build: .
+    command: ["node", "src/apps/webhook.js"]
+    environment: { <<: *app-env, PORT: "3002" }
+    ports: ["3002:3002"]
+    depends_on:
+      redis-core: { condition: service_healthy }
+
+  worker:
+    build: .
+    command: ["node", "src/apps/worker.js"]
+    environment: *app-env
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      pgbouncer: { condition: service_started }
+      redis-core: { condition: service_healthy }
+
+  scheduler:
+    build: .
+    command: ["node", "src/apps/scheduler.js"]
+    environment: *app-env
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      postgres: { condition: service_healthy }
+      redis-core: { condition: service_healthy }
+
+volumes:
+  pgdata: {}
+  rediscore: {}
+  minio: {}

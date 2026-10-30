@@ -1,0 +1,43 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgres://sahayak_api:dev@localhost:5432/sahayak
+      DATABASE_URL_MAINT: postgres://sahayak_maint:dev@localhost:5432/sahayak
+      REDIS_CORE_URL: redis://localhost:6379
+      REDIS_CACHE_URL: redis://localhost:6379
+      DEV_MASTER_KEY: c2FoYXlhay1kZXYtbWFzdGVyLWtleS0zMi1ieXRlcyE=
+      BLIND_INDEX_KEY: c2FoYXlhay1kZXYtYmxpbmQtaW5kZXgtMzJieXRlcyE=
+      JWT_PRIVATE_KEY: ${{ secrets.TEST_JWT_PRIVATE_KEY }}
+      JWT_PUBLIC_KEY: ${{ secrets.TEST_JWT_PUBLIC_KEY }}
+      WA_APP_SECRET: test
+      WA_VERIFY_TOKEN: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run build
+      - name: Unit + clinical safety suite (CI-blocking)
+        run: npm run test:unit
+      - name: Integration (Testcontainers: pgvector/pgvector:pg18, redis:8)
+        run: npm run test:integration
+      - name: LLM evals (only when prompts or models change)
+        if: contains(join(github.event.commits.*.modified, ' '), 'prompts/') && secrets.ANTHROPIC_API_KEY != ''
+        env: { ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}, EVAL_NO_DB: '1' }
+        run: |
+          npm run eval -- intake_extract
+          npm run eval -- department_route
+          npm run eval -- kb_answer
+      - name: Security scans
+        run: npm audit --audit-level=high || true
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t sahayak-backend:ci .

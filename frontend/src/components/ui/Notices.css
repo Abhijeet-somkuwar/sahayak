@@ -1,0 +1,39 @@
+.notice {
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-paper);
+  font-size: var(--t-md);
+}
+.notice--success { background: var(--triage-routine-tint); color: var(--triage-routine); }
+.notice--error { background: var(--triage-emergency-tint); color: var(--triage-emergency); }
+.notice--info { background: var(--paper); color: var(--ink); }
+
+.offline-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  background: var(--ward-deep);
+  color: var(--sheet);
+  padding: var(--s-2) var(--s-4);
+  font-size: var(--t-sm);
+}
+
+.stale {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--t-sm);
+}
+.stale--ink { color: var(--ink-soft); }
+.stale--board { color: var(--board-muted); }
+
+.progress {
+  height: 10px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--rule);
+}
+.progress__fill {
+  height: 100%;
+  background: var(--ward);
+}

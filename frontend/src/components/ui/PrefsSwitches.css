@@ -1,0 +1,26 @@
+.pref-group {
+  display: flex;
+  gap: 4px;
+}
+.pref-btn {
+  border: 0;
+  background: transparent;
+  border-radius: var(--r-control);
+  padding: 0 12px;
+  font-family: var(--font-text);
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--ink);
+  min-height: 44px;
+  font-size: var(--t-md);
+}
+.pref-group--staff .pref-btn {
+  min-height: 32px;
+  font-size: var(--t-sm);
+}
+.pref-btn--ink:hover { background: var(--paper); }
+.pref-btn--ink.is-active { background: var(--stamp); color: var(--sheet); }
+.pref-btn--ink.is-active-ink { background: var(--ink); color: var(--sheet); }
+.pref-btn--sheet { color: rgb(255 255 255 / 0.85); }
+.pref-btn--sheet:hover { background: rgb(255 255 255 / 0.1); }
+.pref-btn--sheet.is-active { background: var(--sheet); color: var(--ward); }

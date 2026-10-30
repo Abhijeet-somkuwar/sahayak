@@ -1,0 +1,248 @@
+.dept-list {
+  list-style: none;
+}
+.dept-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: var(--rule-width) solid var(--rule);
+}
+.dept-list li:last-child {
+  border-bottom: 0;
+}
+
+/* Intake */
+.intake-question {
+  font-size: var(--t-xl);
+  line-height: 1.3;
+  font-weight: 500;
+}
+.intake-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+.intake-actions .ant-btn:last-child {
+  flex: 1;
+}
+.intake-progress {
+  text-align: center;
+  font-size: var(--t-sm);
+  color: var(--ink-soft);
+}
+.intake-voice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Emergency takeover */
+.emergency {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+  text-align: center;
+  background: var(--triage-emergency-tint);
+  color: var(--ink);
+}
+.emergency__title {
+  font-family: var(--font-display);
+  font-size: var(--t-3xl);
+  font-weight: 700;
+  color: var(--triage-emergency);
+}
+.emergency__call {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 0 32px;
+  border-radius: var(--r-control);
+  background: var(--triage-emergency);
+  color: var(--sheet);
+  font-size: var(--t-lg);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Your-turn takeover */
+.your-turn {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  text-align: center;
+  background: var(--ward-deep);
+  color: var(--sheet);
+}
+.your-turn .token-numeral--board {
+  font-size: 22vw;
+  line-height: 1;
+}
+.your-turn__room {
+  font-family: var(--font-display);
+  font-size: var(--t-3xl);
+  font-weight: 600;
+  color: var(--marigold);
+}
+
+/* Slip page */
+.slip-ref {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--t-lg);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+.slip-room {
+  font-family: var(--font-display);
+  font-size: var(--t-3xl);
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+/* Kiosk */
+.kiosk {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+}
+.kiosk__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: var(--ward);
+  color: var(--sheet);
+}
+.kiosk__brand p {
+  font-family: var(--font-display);
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.kiosk__lang {
+  display: flex;
+  gap: 4px;
+}
+.kiosk__lang button {
+  min-height: 56px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--r-control);
+  background: transparent;
+  color: rgb(255 255 255 / 0.85);
+  font-size: var(--t-lg);
+  font-weight: 500;
+  cursor: pointer;
+}
+.kiosk__lang button[aria-checked='true'] {
+  background: var(--sheet);
+  color: var(--ward);
+}
+.kiosk__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 24px;
+}
+.kiosk__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--t-2xl);
+  font-weight: 500;
+}
+.kiosk__scanner {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  max-width: 448px;
+}
+.kiosk__bottom {
+  margin-top: auto;
+  width: 100%;
+  max-width: 448px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 384px;
+}
+.keypad button {
+  display: grid;
+  place-items: center;
+  min-height: 80px;
+  border: var(--rule-width) solid var(--rule);
+  border-radius: var(--r-control);
+  background: var(--sheet);
+  font-family: var(--font-display);
+  font-size: var(--t-3xl);
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+.keypad button:active {
+  background: var(--paper);
+}
+.keypad__out {
+  min-height: 64px;
+  font-size: var(--t-3xl);
+  letter-spacing: 0.15em;
+}
+.household {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  list-style: none;
+}
+.household button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 80px;
+  padding: 0 20px;
+  border: var(--rule-width) solid var(--rule);
+  border-radius: var(--r-paper);
+  background: var(--sheet);
+  font-size: var(--t-xl);
+  text-align: left;
+  cursor: pointer;
+}
+.household button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.kiosk__ref-input {
+  width: 100%;
+  max-width: 384px;
+  padding: 16px;
+  border: var(--rule-width) solid var(--rule);
+  border-radius: var(--r-control);
+  background: var(--sheet);
+  text-align: center;
+  font-size: var(--t-3xl);
+  letter-spacing: 0.15em;
+}

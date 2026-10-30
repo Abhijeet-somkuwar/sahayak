@@ -1,0 +1,23 @@
+.error-summary {
+  border: 2px solid var(--triage-emergency);
+  background: var(--triage-emergency-tint);
+  border-radius: var(--r-paper);
+  padding: var(--s-4);
+  color: var(--ink);
+}
+.error-summary__title {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 500;
+  color: var(--triage-emergency);
+}
+.error-summary ul {
+  margin-top: var(--s-2);
+  padding-left: var(--s-6);
+}
+.error-summary a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

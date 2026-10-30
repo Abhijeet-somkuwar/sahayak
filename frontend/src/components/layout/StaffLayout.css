@@ -1,0 +1,87 @@
+.staff-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+}
+.staff-layout__body {
+  min-height: 0;
+  flex: 1;
+}
+.staff-header {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  height: 48px;
+  flex-shrink: 0;
+  padding: 0 var(--s-4);
+  background: var(--ward);
+  color: var(--sheet);
+}
+.staff-header__brand {
+  font-size: var(--t-lg);
+  font-weight: 600;
+}
+.staff-header__facility {
+  font-size: var(--t-sm);
+  color: rgb(255 255 255 / 0.85);
+}
+.staff-header__nav {
+  display: flex;
+  gap: 4px;
+}
+.staff-header__link {
+  padding: 4px 12px;
+  border-radius: var(--r-control);
+  color: var(--sheet);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  text-decoration: none;
+}
+.staff-header__link:hover { background: rgb(255 255 255 / 0.1); color: var(--sheet); }
+.staff-header__link.is-active { background: rgb(255 255 255 / 0.15); }
+.staff-header__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.staff-header__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--t-sm);
+}
+.staff-header__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.4);
+}
+.staff-header__dot.is-on { background: var(--marigold); }
+
+/* Shared staff page scaffolding: panes are regions, no radius */
+.staff-pane {
+  background: var(--sheet);
+  min-height: 0;
+  overflow-y: auto;
+}
+.staff-subheader {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  height: 40px;
+  padding: 0 var(--s-4);
+  background: var(--ward-deep);
+  color: var(--sheet);
+  font-size: var(--t-sm);
+}
+.staff-subheader select {
+  background: rgb(255 255 255 / 0.1);
+  color: var(--sheet);
+  border: 0;
+  border-radius: var(--r-control);
+  padding: 2px 8px;
+}
+.staff-subheader option { color: var(--ink); }

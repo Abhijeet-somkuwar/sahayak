@@ -1,0 +1,165 @@
+{
+  "duration_ms": 524496,
+  "captions": [
+    {
+      "t_ms": 2411,
+      "text": "This is Sahayak, the front door of a government hospital’s OPD. In the next few minutes we follow one patient, Sunita, from her home to the doctor’s room, and see what every person in the hospital sees."
+    },
+    {
+      "t_ms": 14770,
+      "text": "On the left is the patient’s phone. On the right, the doctor’s screen. The queue is empty: nothing has happened yet today."
+    },
+    {
+      "t_ms": 23047,
+      "text": "Sunita Sharma, 58, has had fever and body ache for two days. Her son opens the hospital page on his phone and taps Start a visit."
+    },
+    {
+      "t_ms": 32290,
+      "text": "He signs in with his mobile number. A one-time code arrives by SMS. In this demo, the code is shown on the screen."
+    },
+    {
+      "t_ms": 40834,
+      "text": "Consent comes first. She agrees to the visit, and allows a computer assistant to help with the questions."
+    },
+    {
+      "t_ms": 47674,
+      "text": "Who is the patient? Her name, sex and age, and how she is related to the phone’s owner."
+    },
+    {
+      "t_ms": 58307,
+      "text": "Now she describes the problem in her own words. Hindi, Gujarati and Hinglish work just as well."
+    },
+    {
+      "t_ms": 67487,
+      "text": "The assistant shows what it understood: fever and body ache, since two days. Then it asks a few safety questions, written by doctors, not by the AI."
+    },
+    {
+      "t_ms": 77804,
+      "text": "No danger signs. A couple of routine questions follow: how long, any long-term illness, any disability."
+    },
+    {
+      "t_ms": 118613,
+      "text": "Her visit is booked: Medicine OPD, Room 1, a time window to arrive, the expected wait, and a QR code for the gate."
+    },
+    {
+      "t_ms": 127228,
+      "text": "Further down: How Sahayak decided. What she told us, how urgent it is and why, and which department. The AI suggested the department; the hospital’s own clinical rules decided she is routine. This is not a diagnosis. The patient never sees an AI-guessed disease."
+    },
+    {
+      "t_ms": 145110,
+      "text": "Notice the doctor’s screen: still nothing. Token numbers are given only on arrival, so nobody can hold a place in the queue from home."
+    },
+    {
+      "t_ms": 153733,
+      "text": "Sunita reaches the hospital. At the gate kiosk she scans her QR code. Here, we type the check-in code instead."
+    },
+    {
+      "t_ms": 162051,
+      "text": "Checked in. She gets her token number, the room to go to, how many people are ahead of her, and a short slip code."
+    },
+    {
+      "t_ms": 170023,
+      "text": "On her phone, she enters the slip code and follows the queue live."
+    },
+    {
+      "t_ms": 175944,
+      "text": "The doctor’s queue now shows her token in the General lane. In the background, Sahayak starts preparing her case summary."
+    },
+    {
+      "t_ms": 183672,
+      "text": "Not everyone has a smartphone. Ramesh Patel, 72, walks up to the registration counter."
+    },
+    {
+      "t_ms": 191012,
+      "text": "The clerk registers him in seconds: name, sex, age, mobile number and district. The clerk never sees any medical details."
+    },
+    {
+      "t_ms": 199783,
+      "text": "One click checks him into Medicine OPD. He gets the next token and a status link for his phone."
+    },
+    {
+      "t_ms": 206167,
+      "text": "Ramesh is over sixty, so he joins the Protected lane."
+    },
+    {
+      "t_ms": 210756,
+      "text": "Doctor Anil Mehta’s screen has three lanes: Urgent, Protected and General. Ramesh is in Protected, Sunita in General. He clicks Call next."
+    },
+    {
+      "t_ms": 221106,
+      "text": "Ramesh is called first, even though Sunita checked in earlier. Protected and general patients take turns: one protected for every two general."
+    },
+    {
+      "t_ms": 230168,
+      "text": "The waiting-hall TV announces his token and room with a chime, and rotates between English, Hindi and Gujarati."
+    },
+    {
+      "t_ms": 238852,
+      "text": "Start consult, then Complete. Then Call next again. This time it is Sunita."
+    },
+    {
+      "t_ms": 245573,
+      "text": "Her phone turns green: Your turn, go to Room 1 now."
+    },
+    {
+      "t_ms": 249911,
+      "text": "The doctor’s card. At the top, facts from her record: allergies, medicines, conditions, today’s complaint. Below, a Summary marked AI-generated, verify, written before she walked in: a headline, key points, possible conditions to consider, and questions worth asking."
+    },
+    {
+      "t_ms": 269239,
+      "text": "Those possible conditions are suggestions for the doctor only. India’s Telemedicine Practice Guidelines let AI assist the doctor, never diagnose the patient."
+    },
+    {
+      "t_ms": 278738,
+      "text": "The doctor records the diagnosis: viral fever."
+    },
+    {
+      "t_ms": 282572,
+      "text": "And a prescription: Paracetamol 500 milligrams, one tablet, three times a day, for three days, after food."
+    },
+    {
+      "t_ms": 294946,
+      "text": "Complete. Sunita’s phone shows Visit complete, with her diagnosis and her medicines in plain words. She shows this screen at the pharmacy."
+    },
+    {
+      "t_ms": 310824,
+      "text": "A week later, Sunita is back with a headache. She signs in with the same number, and Sahayak already knows her. No name, age or consent questions this time."
+    },
+    {
+      "t_ms": 321886,
+      "text": "She describes the new problem, answers the safety questions, and is booked again."
+    },
+    {
+      "t_ms": 373673,
+      "text": "At the gate, she checks in."
+    },
+    {
+      "t_ms": 379862,
+      "text": "The doctor calls her, and now the screen shows her past: the fever visit under Recent visits, paracetamol under Medicines, an AI History summary, and possible conditions for today’s headache."
+    },
+    {
+      "t_ms": 394125,
+      "text": "At the bottom, the full visit history for the last 24 months. Opening a visit shows its diagnosis, medicines, the doctor who saw her, and the AI summary written at that visit."
+    },
+    {
+      "t_ms": 410048,
+      "text": "And on her phone: My visits and medicines. Every visit and every prescription in one place."
+    },
+    {
+      "t_ms": 423806,
+      "text": "One last scenario. From the same phone, Sunita’s husband Mahesh, 61, reports chest pain and sweating since one hour."
+    },
+    {
+      "t_ms": 472858,
+      "text": "A red screen: Go to Casualty now, call 108. No booking, no more questions. Danger words are caught by a list written by doctors, before any AI is asked."
+    },
+    {
+      "t_ms": 485193,
+      "text": "In Casualty, a new alert appears with a chime: age group, sex and the danger signs. The team acknowledges it before he even arrives."
+    },
+    {
+      "t_ms": 496459,
+      "text": "That is Sahayak. Patients book from home and follow the queue in their own language. Clerks register in seconds. Doctors see the history and an AI summary before the patient walks in. Casualty is alerted the moment danger signs appear. And the hospital runs on fair, written queue rules."
+    }
+  ]
+}
